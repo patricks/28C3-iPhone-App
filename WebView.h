@@ -10,10 +10,8 @@
 
 
 @interface WebView : UIViewController <UIWebViewDelegate>{
-	
 	IBOutlet UIWebView *webView;
 	NSString *urlToOpen;
-
 }
 
 @property (nonatomic,retain) NSString *urlToOpen;

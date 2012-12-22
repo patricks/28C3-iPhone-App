@@ -10,7 +10,6 @@
 
 
 @interface Event : NSObject {
-	
 	NSInteger eventID;
 	NSString *title;	//Same name as the Entity Name.
 	NSString *room;	//Same name as the Entity Name.
@@ -45,6 +44,7 @@
 @property (nonatomic, retain) NSDate *startDate;
 @property (nonatomic, retain) NSDate *realDate;
 @property (nonatomic) BOOL reminderSet;
+
 - (BOOL)isAtDate:(NSDate *)_date;
 
 @end

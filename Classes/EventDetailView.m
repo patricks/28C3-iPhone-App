@@ -59,8 +59,7 @@
 	idLabel.text = [@"Date: " stringByAppendingFormat:@"%@",aEvent.date];
 	if ([aEvent.language isEqualToString:@"de"]){
 		theLanguage = @"German";
-	}
-	else if ([aEvent.language isEqualToString:@"en"]) {
+	} else if ([aEvent.language isEqualToString:@"en"]) {
 		theLanguage = @"English";
 	}
 				 
@@ -78,40 +77,44 @@
     [scrollView setContentOffset:CGPointMake(0, 0) animated:YES]; 
 }
 
--(IBAction)actionButtonPressed:(id)sender{
+- (IBAction)actionButtonPressed:(id)sender {
 	UIActionSheet *actionSheet;
     
-    if (!fromFavorites){
-    
+    if (!fromFavorites) {
+        actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                  delegate:self
+                                         cancelButtonTitle:@"Cancel"
+                                    destructiveButtonTitle:nil
+                                         otherButtonTitles:@"View in Web", @"Add to favorites", @"Add to calendar", nil];
+    } else {
+        if (aEvent.reminderSet) {
             actionSheet = [[UIActionSheet alloc] initWithTitle:nil
-															 delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"View in Web",@"Add to favorites",@"Add to calendar",nil];
-    }
-    else {
-        if (aEvent.reminderSet){
+                                                      delegate:self
+                                             cancelButtonTitle:@"Cancel"
+                                        destructiveButtonTitle:nil
+                                             otherButtonTitles:@"View in Web", @"Remove reminder", @"Add to calendar", nil];
+        } else {
             actionSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                      delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"View in Web",@"Remove reminder",@"Add to calendar",nil];
-        }
-        else {
-            actionSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                      delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"View in Web",@"Set reminder",@"Add to calendar",nil];
+                                                      delegate:self
+                                             cancelButtonTitle:@"Cancel"
+                                        destructiveButtonTitle:nil
+                                             otherButtonTitles:@"View in Web", @"Set reminder", @"Add to calendar", nil];
         }
     }
     actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
-	actionSheet.tag=1;
+	actionSheet.tag = 1;
     [actionSheet showFromTabBar:self.tabBarController.tabBar];
     [actionSheet release];
-	
 }
 
 #pragma mark -
 #pragma mark UIActionSheetDelegate
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (!fromFavorites) {
         switch (buttonIndex) {
             case 0:
-                if(wvController == nil)
+                if (wvController == nil)
                     wvController = [[WebView alloc] initWithNibName:@"WebView" bundle:[NSBundle mainBundle]];
                 
                 NSString *theUrl = @"http://events.ccc.de/congress/2011/Fahrplan/events/";
@@ -126,15 +129,13 @@
                 NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
                 NSData *dataRepresentingSavedArray = [currentDefaults objectForKey:@"favorites"];
                 NSMutableArray *favoritesArray;
-                if (dataRepresentingSavedArray != nil)
-                {
+                if (dataRepresentingSavedArray != nil) {
                     NSArray *oldSavedArray = [NSKeyedUnarchiver unarchiveObjectWithData:dataRepresentingSavedArray];
                     if (oldSavedArray != nil)
                         favoritesArray = [[NSMutableArray alloc] initWithArray:oldSavedArray];
                     else
                         favoritesArray = [[NSMutableArray alloc] init];
-                }
-                else {
+                } else {
                     favoritesArray = [[NSMutableArray alloc] init];
                 }
                 
@@ -145,7 +146,7 @@
                 double minutes = [[durationArray objectAtIndex:1] doubleValue] * 60;
 
                 for (Event *favoriteEvent in favoritesArray) {
-                    if (favoriteEvent.eventID == aEvent.eventID){
+                    if (favoriteEvent.eventID == aEvent.eventID) {
                         isAlreadyFavorite = YES;
                     }
                     if ([self date:aEvent.realDate isBetweenDate:favoriteEvent.realDate andDate:[NSDate dateWithTimeInterval:hours+minutes sinceDate:favoriteEvent.realDate]]){
@@ -185,23 +186,21 @@
                 NSError *err;
                 [eventStore saveEvent:event span:EKSpanThisEvent error:&err]; 
                 [eventStore release];
-                if (!err){
+                if (!err) {
                     UIAlertView *dateAlert = [[UIAlertView alloc]initWithTitle:@"Saved" message:@"The event was saved to your calendar" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                     [dateAlert show];
                     [dateAlert release];
                 }
                 break;
-            }			
-                
+            }
         }
-    }
-    else {
+    } else {
         switch (buttonIndex) {
             case 0:
-                if(wvController == nil)
+                if (wvController == nil)
                     wvController = [[WebView alloc] initWithNibName:@"WebView" bundle:[NSBundle mainBundle]];
                 
-                NSString *theUrl = @"http://events.ccc.de/congress/2011/Fahrplan/events/";
+                NSString *theUrl = @"http://events.ccc.de/congress/2012/Fahrplan/events/";
                 theUrl = [[theUrl stringByAppendingFormat:@"%i",aEvent.eventID] stringByAppendingString:@".en.html"];
                 
                 wvController.urlToOpen = theUrl;
@@ -211,7 +210,7 @@
                 break;
                 
             case 1:
-                if (aEvent.reminderSet){
+                if (aEvent.reminderSet) {
                     for (UILocalNotification *notification in [[UIApplication sharedApplication] scheduledLocalNotifications]){
                         NSDictionary *userInfo = notification.userInfo;
                         NSNumber *version =  [userInfo objectForKey:@"28C3Reminder"];
@@ -220,8 +219,7 @@
                         }
                     }
                     aEvent.reminderSet = NO;
-                }
-                else {
+                } else {
                     UILocalNotification *reminder = [[UILocalNotification alloc]init];
                     reminder.fireDate = [NSDate dateWithTimeInterval:-900 sinceDate:aEvent.realDate];
                     reminder.timeZone = [NSTimeZone timeZoneWithName:@"Europe/Berlin"];
@@ -244,23 +242,21 @@
                 NSData *dataRepresentingSavedArray = [currentDefaults objectForKey:@"favorites"];
                 NSMutableArray *favoritesArray = [[NSMutableArray alloc] init];
                                 
-                if (dataRepresentingSavedArray != nil)
-                {
+                if (dataRepresentingSavedArray != nil) {
                     NSArray *oldSavedArray = [NSKeyedUnarchiver unarchiveObjectWithData:dataRepresentingSavedArray];
                     if (oldSavedArray != nil){
                         [favoritesArray setArray:oldSavedArray];
                     }
                 }
-                for (int i=0; i < favoritesArray.count; i++){
+                for (int i=0; i < favoritesArray.count; i++) {
                     Event *savedEvent = [favoritesArray objectAtIndex:i];
-                    if (savedEvent.eventID == aEvent.eventID){
+                    if (savedEvent.eventID == aEvent.eventID) {
                         [favoritesArray replaceObjectAtIndex:i withObject:aEvent];
                     }
                 }
                 [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:favoritesArray] forKey:@"favorites"];
                 [[NSUserDefaults standardUserDefaults]synchronize];
                 [favoritesArray release];
-                
                 break;
             case 2: {
                 EKEventStore *eventStore = [[EKEventStore alloc] init];
@@ -283,15 +279,14 @@
 
                 [eventStore release];
 
-                if (!err){
+                if (!err) {
                     UIAlertView *dateAlert = [[UIAlertView alloc]initWithTitle:@"Saved" message:@"The event was saved to your calendar" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                     [dateAlert show];
                     [dateAlert release];
                 }
                 break;
             }
-        }			
-                
+        }
     }
 }
 
@@ -309,21 +304,19 @@
 #pragma mark UIAlertViewDelegate
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (alertView.tag == 2){
+    if (alertView.tag == 2) {
         switch (buttonIndex) {
             case 0: {
                 NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
                 NSData *dataRepresentingSavedArray = [currentDefaults objectForKey:@"favorites"];
                 NSMutableArray *favoritesArray;
-                if (dataRepresentingSavedArray != nil)
-                {
+                if (dataRepresentingSavedArray != nil) {
                     NSArray *oldSavedArray = [NSKeyedUnarchiver unarchiveObjectWithData:dataRepresentingSavedArray];
                     if (oldSavedArray != nil)
                         favoritesArray = [[NSMutableArray alloc] initWithArray:oldSavedArray];
                     else
                         favoritesArray = [[NSMutableArray alloc] init];
-                }
-                else {
+                } else {
                     favoritesArray = [[NSMutableArray alloc] init];
                 }
                 
@@ -339,7 +332,6 @@
         }
     }
 }
-
 
 #pragma mark -
 #pragma mark Memory management
@@ -367,7 +359,6 @@
     [image release];
     [super dealloc];
 }
-
 
 @end
 

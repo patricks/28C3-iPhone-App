@@ -8,13 +8,11 @@
 
 #import "Event.h"
 
-
 @implementation Event
 
 @synthesize title, room, abstract, description, eventID, subtitle, start, duration,date,language,track,startDate,realDate,reminderSet,speaker;
 
-- (void)encodeWithCoder:(NSCoder *)coder;
-{
+- (void)encodeWithCoder:(NSCoder *)coder {
     [coder encodeObject:title forKey:@"title"];
     [coder encodeObject:room forKey:@"room"];
     [coder encodeObject:abstract forKey:@"abstract"];
@@ -33,10 +31,8 @@
 
 }
 
-- (id)initWithCoder:(NSCoder *)coder;
-{
-    if (self = [super init])
-    {
+- (id)initWithCoder:(NSCoder *)coder {
+    if (self = [super init]) {
         self.title = [coder decodeObjectForKey:@"title"];
         self.room = [coder decodeObjectForKey:@"room"];
         self.abstract = [coder decodeObjectForKey:@"abstract"];
@@ -67,7 +63,6 @@
 }
 
 - (void) dealloc {
-	
 	[abstract release];
     [description release];
 	[subtitle release];
@@ -81,7 +76,6 @@
     [startDate release];
     [realDate release];
 	[super dealloc];
-	
 }
 
 @end

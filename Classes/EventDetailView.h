@@ -13,7 +13,6 @@
 @class Event, WebView, ReminderView;
 
 @interface EventDetailView : UIViewController <UIActionSheetDelegate, UIAlertViewDelegate> {
-
 	Event *aEvent;
 	WebView *wvController;
 	ReminderView *rvController;
@@ -39,7 +38,7 @@
 @property (nonatomic) BOOL fromFavorites;
 @property (nonatomic, retain) IBOutlet AutoScrollLabel *asTitleLabel;
 
--(IBAction)actionButtonPressed:(id)sender;
+- (IBAction)actionButtonPressed:(id)sender;
 - (BOOL) date:(NSDate*)date isBetweenDate:(NSDate*)beginDate andDate:(NSDate*)endDate;
 
 
