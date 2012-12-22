@@ -71,6 +71,7 @@
 		B4E54C22149639BB008F1D87 /* 28c3_sectionheader.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E54C20149639BB008F1D87 /* 28c3_sectionheader.png */; };
 		B4E54C23149639BB008F1D87 /* 28c3_sectionheader@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E54C21149639BB008F1D87 /* 28c3_sectionheader@2x.png */; };
 		CD0FA39414AE0C1000E8FA53 /* AutoScrollLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0FA39314AE0C1000E8FA53 /* AutoScrollLabel.m */; };
+		CD16166C1686466F0021A52C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD16166B1686466F0021A52C /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -152,6 +153,7 @@
 		B4E54C21149639BB008F1D87 /* 28c3_sectionheader@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "28c3_sectionheader@2x.png"; sourceTree = "<group>"; };
 		CD0FA39214AE0C1000E8FA53 /* AutoScrollLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoScrollLabel.h; sourceTree = "<group>"; };
 		CD0FA39314AE0C1000E8FA53 /* AutoScrollLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoScrollLabel.m; sourceTree = "<group>"; };
+		CD16166B1686466F0021A52C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +210,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				CD16166B1686466F0021A52C /* Default-568h@2x.png */,
 				B423C4261492687A00D51E17 /* 28C3.entitlements */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -321,7 +324,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0460;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "28C3" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -396,6 +399,7 @@
 				B4C00F011496522200B799D0 /* 28c3_tableview_arrow@2x.png in Resources */,
 				2CEC18B514AB42B500DAE664 /* 28c3_tableview_arrow_now.png in Resources */,
 				2CEC18B614AB42B500DAE664 /* 28c3_tableview_arrow_now@2x.png in Resources */,
+				CD16166C1686466F0021A52C /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +441,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = _7C3_Prefix.pch;
+				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "_7C3-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				PRODUCT_NAME = 28C3;
@@ -457,6 +462,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = _7C3_Prefix.pch;
+				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "_7C3-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				PRODUCT_NAME = 28C3;
@@ -493,6 +499,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = _7C3_Prefix.pch;
+				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "_7C3-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				PRODUCT_NAME = 28C3;

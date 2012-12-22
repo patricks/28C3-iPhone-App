@@ -13,8 +13,7 @@
 
 #pragma mark - View lifecycle
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"28c3_background_long"]];
@@ -29,6 +28,7 @@
 - (void)viewDidAppear:(BOOL)animated {
       [self.streamWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.call-a-nerd.de/28C3/streams.html"]]];
 }
+
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     if (error){
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"You need to be online to view the streams" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];

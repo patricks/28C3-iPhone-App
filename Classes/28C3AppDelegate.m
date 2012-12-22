@@ -50,7 +50,7 @@
 
 -(void)loadXML {
     if (connection == nil) {
-        NSURL *myURL = [NSURL URLWithString:@"http://events.ccc.de/congress/2011/Fahrplan/schedule.en.xml"];
+        NSURL *myURL = [NSURL URLWithString:@"http://events.ccc.de/congress/2012/Fahrplan/schedule.en.xml"];
                 
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:myURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10];
         connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -192,7 +192,7 @@
             [offlineAlert release];
         }
     }
-    else{
+    else {
         NSLog(@"Error parsing xml");
     }
     [parser release];

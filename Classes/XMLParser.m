@@ -26,7 +26,7 @@
 		//Empty the array.
         [appDelegate.events removeAllObjects];
 	}
-	else if([elementName isEqualToString:@"day"]){
+	else if([elementName isEqualToString:@"day"]) {
 		tempString = [attributeDict objectForKey:@"date"];
 	}
 	else if([elementName isEqualToString:@"event"]) {
@@ -119,27 +119,30 @@
         
 		[aEvent setValue:tempString forKey:@"date"];
         
-        NSDateFormatter *df = [[NSDateFormatter alloc] init];
-        [df setDateFormat:@"yyyy-MM-dd HH:mm"];
-        NSDate *myDate = [df dateFromString: [NSString stringWithFormat:@"%@ %@",aEvent.date,aEvent.start]];
+        NSLog(@"DBG: tempString: %@", tempString);
         
-        [aEvent setStartDate:myDate];
-        [df release];
+        if ([aEvent.date length] > 0) {
+            NSDateFormatter *df = [[NSDateFormatter alloc] init];
+            [df setDateFormat:@"yyyy-MM-dd HH:mm"];
         
-        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSHourCalendarUnit fromDate:myDate];
-        NSInteger hour = [components hour];
-        
-        if (hour < 8){
-            [aEvent setRealDate:[myDate dateByAddingTimeInterval:86400]];
+            NSDate *myDate = [df dateFromString: [NSString stringWithFormat:@"%@ %@",aEvent.date,aEvent.start]];
+            [aEvent setStartDate:myDate];
+            
+            [df release];
+            
+            NSDateComponents *components = [[NSCalendar currentCalendar] components:NSHourCalendarUnit fromDate:myDate];
+            NSInteger hour = [components hour];
+            
+            if (hour < 8){
+                [aEvent setRealDate:[myDate dateByAddingTimeInterval:86400]];
+            }
+            else {
+                [aEvent setRealDate:myDate];
+            }
         }
-        else {
-            [aEvent setRealDate:myDate];
-        }
-	
 	[currentElementValue release];
 	currentElementValue = nil;
 	}
-	
 }
 
 - (void) dealloc {

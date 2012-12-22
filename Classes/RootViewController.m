@@ -85,8 +85,7 @@
 
 - (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
 	// the user clicked one of the OK/Cancel buttons
-	if (buttonIndex == 0)
-	{
+	if (buttonIndex == 0) {
 		exit(0);
 	}
 	
@@ -115,10 +114,10 @@
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     [df setDateFormat:@"yyyy-MM-dd"];
     
-    NSDate *firstDay = [df dateFromString:@"2011-12-27"];
-    NSDate *secondDay = [df dateFromString:@"2011-12-28"];
-    NSDate *thirdDay = [df dateFromString:@"2011-12-29"];
-    NSDate *fourthDay = [df dateFromString:@"2011-12-30"];
+    NSDate *firstDay = [df dateFromString:@"2012-12-27"];
+    NSDate *secondDay = [df dateFromString:@"2012-12-28"];
+    NSDate *thirdDay = [df dateFromString:@"2012-12-29"];
+    NSDate *fourthDay = [df dateFromString:@"2012-12-30"];
     
     [df release];
 	
@@ -211,16 +210,16 @@
     else {
         switch (section) {
             case 0:
-                return @"Tuesday";
-                break;
-            case 1:
-                return @"Wednesday";
-                break;
-            case 2:
                 return @"Thursday";
                 break;
-            case 3:
+            case 1:
                 return @"Friday";
+                break;
+            case 2:
+                return @"Saturday";
+                break;
+            case 3:
+                return @"Sunday";
                 break;
         }
         return @"";
