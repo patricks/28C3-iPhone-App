@@ -75,34 +75,34 @@
 		NSString *theCleanestString = [cleanerString stringByReplacingOccurrencesOfString:@"\r" withString:@""];
 		theCleanestString = [theCleanestString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 
-		if ([elementName isEqualToString:@"title"]){
+		if ([elementName isEqualToString:@"title"]) {
 			[aEvent setValue:theCleanestString forKey:elementName];
 		}
-		if ([elementName isEqualToString:@"subtitle"]){
+		if ([elementName isEqualToString:@"subtitle"]) {
 			[aEvent setValue:theCleanestString forKey:elementName];
 		}
-		if ([elementName isEqualToString:@"abstract"]){
+		if ([elementName isEqualToString:@"abstract"]) {
 			[aEvent setValue:theCleanestString forKey:elementName];
 		}
-        if ([elementName isEqualToString:@"description"]){
+        if ([elementName isEqualToString:@"description"]) {
 			[aEvent setValue:theCleanestString forKey:elementName];
 		}
-		if ([elementName isEqualToString:@"duration"]){
+		if ([elementName isEqualToString:@"duration"]) {
 			[aEvent setValue:theCleanestString forKey:elementName];
 		}
-		if ([elementName isEqualToString:@"start"]){
+		if ([elementName isEqualToString:@"start"]) {
 			[aEvent setValue:theCleanestString forKey:elementName];
 		}
-		if ([elementName isEqualToString:@"room"]){
+		if ([elementName isEqualToString:@"room"]) {
 			[aEvent setValue:theCleanestString forKey:elementName];
 		}
-		if ([elementName isEqualToString:@"language"]){
+		if ([elementName isEqualToString:@"language"]) {
 			[aEvent setValue:theCleanestString forKey:elementName];
 		}
-		if ([elementName isEqualToString:@"track"]){
+		if ([elementName isEqualToString:@"track"]) {
 			[aEvent setValue:theCleanestString forKey:elementName];
 		}
-        if ([elementName isEqualToString:@"person"]){
+        if ([elementName isEqualToString:@"person"]) {
             if (aEvent.speaker != nil) {
                 NSString *speakerTemp = [[aEvent.speaker stringByAppendingString:@", "] stringByAppendingString:theCleanestString];
                 [aEvent setValue:speakerTemp forKey:@"speaker"];

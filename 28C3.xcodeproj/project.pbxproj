@@ -210,7 +210,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				CD16166B1686466F0021A52C /* Default-568h@2x.png */,
 				B423C4261492687A00D51E17 /* 28C3.entitlements */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -233,6 +232,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CD16166B1686466F0021A52C /* Default-568h@2x.png */,
 				2CEC18B314AB42B500DAE664 /* 28c3_tableview_arrow_now.png */,
 				2CEC18B414AB42B500DAE664 /* 28c3_tableview_arrow_now@2x.png */,
 				B4E54C1814963109008F1D87 /* 28c3_background_long.png */,

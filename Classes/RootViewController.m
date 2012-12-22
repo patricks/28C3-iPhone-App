@@ -317,8 +317,6 @@
         }
     }
     
-    NSLog(@"DBG: code: %@", aEvent.track);
-    
 	UIImage *trackColor = [UIImage imageNamed:@"community.png"];
 	if ([aEvent.track isEqualToString:@"Culture"]){
 		trackColor = [UIImage imageNamed:@"culture.png"];

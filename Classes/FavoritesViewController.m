@@ -13,8 +13,7 @@
 
 @synthesize favoritesArray;
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
+- (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
@@ -22,8 +21,7 @@
     return self;
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
@@ -32,8 +30,7 @@
 
 #pragma mark - View lifecycle
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 
     self.title = @"Favorites";
@@ -44,26 +41,22 @@
     }
     
     self.tableView.backgroundView = [[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"28c3_background"]] autorelease];
-
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [favoritesArray release];
     
     NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
     NSData *dataRepresentingSavedArray = [currentDefaults objectForKey:@"favorites"];
-    if (dataRepresentingSavedArray != nil)
-    {
+    if (dataRepresentingSavedArray != nil) {
         NSArray *oldSavedArray = [NSKeyedUnarchiver unarchiveObjectWithData:dataRepresentingSavedArray];
         if (oldSavedArray != nil)
             favoritesArray = [[NSMutableArray alloc] initWithArray:oldSavedArray];
@@ -78,45 +71,38 @@
     [self.tableView reloadData];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     // Better call periodically, to update "now" indicator 
     [self.tableView reloadData];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 }
 
-- (void)viewDidDisappear:(BOOL)animated
-{
+- (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     return self.favoritesArray.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -127,19 +113,15 @@
     Event *aEvent = [favoritesArray objectAtIndex:indexPath.row];
     
     UIImage *trackColor = [UIImage imageNamed:@"community.png"];
-	if ([aEvent.track isEqualToString:@"Culture"]){
+	if ([aEvent.track isEqualToString:@"Culture"]) {
 		trackColor = [UIImage imageNamed:@"culture.png"];
-	}
-	else if ([aEvent.track isEqualToString:@"Society and Politics"]){
+	} else if ([aEvent.track isEqualToString:@"Society and Politics"]) {
 		trackColor = [UIImage imageNamed:@"society.png"];
-	}
-	else if ([aEvent.track isEqualToString:@"Hacking"]){
+	} else if ([aEvent.track isEqualToString:@"Hacking"]) {
 		trackColor = [UIImage imageNamed:@"hacking.png"];
-	}
-	else if ([aEvent.track isEqualToString:@"Show"]){
+	} else if ([aEvent.track isEqualToString:@"Show"]) {
 		trackColor = [UIImage imageNamed:@"show.png"];
-	}
-	else if ([aEvent.track isEqualToString:@"Science"]){
+	} else if ([aEvent.track isEqualToString:@"Science"]) {
 		trackColor = [UIImage imageNamed:@"science.png"];
 	}
     
@@ -155,10 +137,9 @@
     NSString * backgroundImageName = [aEvent isAtDate:[NSDate date]] ? @"28c3_tableview_arrow_now" : @"28c3_tableview_arrow";
     
     cell.backgroundView = [[[UIImageView alloc]initWithImage:[UIImage imageNamed:backgroundImageName]]autorelease];
-    if ([aEvent.realDate compare:[NSDate date]] == NSOrderedAscending){
+    if ([aEvent.realDate compare:[NSDate date]] == NSOrderedAscending) {
         cell.textLabel.textColor = [UIColor darkGrayColor];
-    }
-    else {
+    } else {
         cell.textLabel.textColor = [UIColor lightGrayColor];
 	}
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
@@ -169,20 +150,14 @@
     return cell;
 }
 
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
 
-
-
 // Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        
         
         [favoritesArray removeObjectAtIndex:indexPath.row];
 
@@ -190,8 +165,7 @@
         
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
@@ -199,9 +173,8 @@
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if(edvController == nil)
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (edvController == nil)
         edvController = [[EventDetailView alloc] initWithNibName:@"EventDetailView" bundle:[NSBundle mainBundle]];
 	
 	Event *aEvent = [favoritesArray objectAtIndex:indexPath.row];
@@ -211,6 +184,5 @@
 	
 	[self.navigationController pushViewController:edvController animated:YES];
 }
-
 
 @end

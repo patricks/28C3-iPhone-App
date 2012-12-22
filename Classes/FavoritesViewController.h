@@ -11,13 +11,10 @@
 
 @class EventDetailView;
 
-@interface FavoritesViewController : UITableViewController {
-    
+@interface FavoritesViewController : UITableViewController {    
     EventDetailView *edvController;
 
-    
     NSMutableArray *favoritesArray;
-    
 }
 
 @property (nonatomic, retain) NSMutableArray *favoritesArray;
