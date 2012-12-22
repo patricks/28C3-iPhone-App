@@ -171,11 +171,11 @@
 
 
 - (BOOL)isSameDay:(NSDate*)date1 to:(NSDate*)date2 {
-    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
     
     unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
-    NSDateComponents* comp1 = [calendar components:unitFlags fromDate:date1];
-    NSDateComponents* comp2 = [calendar components:unitFlags fromDate:date2];
+    NSDateComponents *comp1 = [calendar components:unitFlags fromDate:date1];
+    NSDateComponents *comp2 = [calendar components:unitFlags fromDate:date2];
     
     return [comp1 day]   == [comp2 day] &&
     [comp1 month] == [comp2 month] &&
@@ -316,6 +316,8 @@
                 return nil;
         }
     }
+    
+    NSLog(@"DBG: code: %@", aEvent.track);
     
 	UIImage *trackColor = [UIImage imageNamed:@"community.png"];
 	if ([aEvent.track isEqualToString:@"Culture"]){
