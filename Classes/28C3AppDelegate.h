@@ -22,7 +22,6 @@
     
     BOOL usingOfflineData;
     BOOL newFahrplanVersion;
-
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;

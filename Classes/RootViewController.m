@@ -13,11 +13,17 @@
 
 @implementation RootViewController
 
-@synthesize firstDayArray,secondDayArray,thirdDayArray,fourthDayArray,firstDayAfterMidnightArray,secondDayAfterMidnightArray,thirdDayAfterMidnightArray,fourthDayAfterMidnightArray;
+@synthesize firstDayArray,
+            secondDayArray,
+            thirdDayArray,
+            fourthDayArray,
+            firstDayAfterMidnightArray,
+            secondDayAfterMidnightArray,
+            thirdDayAfterMidnightArray,
+            fourthDayAfterMidnightArray;
 
 #pragma mark -
 #pragma mark View lifecycle
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -57,7 +63,7 @@
 
     if ([self.navigationController.navigationBar respondsToSelector:@selector(setBackgroundImage:forBarMetrics:)]) {
         [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"28c3_navbar"] forBarMetrics:UIBarMetricsDefault];
-        }
+    }
     
     self.tableView.backgroundView = [[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"28c3_background"]] autorelease];
     
@@ -65,16 +71,13 @@
     letUserSelectRow = YES;
 }
 
--(void)viewDidAppear:(BOOL)animated{
+-(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     // Better call periodically, to update "now" indicator 
     [self.tableView reloadData];
 }
 
-- (void) recieveXMLNotification:(NSNotification *) notification
-{
-
-    
+- (void) recieveXMLNotification:(NSNotification *) notification {    
     if ([[notification name] isEqualToString:@"xmlParsed"]) {
         [loadingIndicator stopAnimating];
         [self.navigationItem.rightBarButtonItem setEnabled:YES];
@@ -109,8 +112,6 @@
 
 
 -(void)organizeTheData{
-
-    
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     [df setDateFormat:@"yyyy-MM-dd"];
     
@@ -127,29 +128,23 @@
         NSDateComponents *components = [[NSCalendar currentCalendar] components:NSHourCalendarUnit fromDate:aEvent.startDate];
         NSInteger hour = [components hour];
 	
-		if ([self isSameDay:firstDay to:aEvent.startDate] && hour > 8){
+		if ([self isSameDay:firstDay to:aEvent.startDate] && hour > 8) {
 			[self.firstDayArray addObject:aEvent];
-		}
-		else if ([self isSameDay:secondDay to:aEvent.startDate] && hour > 8){
+		} else if ([self isSameDay:secondDay to:aEvent.startDate] && hour > 8) {
 			[self.secondDayArray addObject:aEvent];
-		}	
-		else if ([self isSameDay:thirdDay to:aEvent.startDate] && hour > 8){
+		} else if ([self isSameDay:thirdDay to:aEvent.startDate] && hour > 8) {
 			[self.thirdDayArray addObject:aEvent];
-		}		
-		else if ([self isSameDay:fourthDay to:aEvent.startDate] && hour > 8){
+		} else if ([self isSameDay:fourthDay to:aEvent.startDate] && hour > 8) {
 			[self.fourthDayArray addObject:aEvent];
 		}
         
-		if ([self isSameDay:firstDay to:aEvent.startDate] && hour < 8){
+		if ([self isSameDay:firstDay to:aEvent.startDate] && hour < 8) {
 			[self.firstDayAfterMidnightArray addObject:aEvent];
-		}
-		else if ([self isSameDay:secondDay to:aEvent.startDate] && hour < 8){
+		} else if ([self isSameDay:secondDay to:aEvent.startDate] && hour < 8) {
 			[self.secondDayAfterMidnightArray addObject:aEvent];
-		}	
-		else if ([self isSameDay:thirdDay to:aEvent.startDate] && hour < 8){
+		} else if ([self isSameDay:thirdDay to:aEvent.startDate] && hour < 8) {
 			[self.thirdDayAfterMidnightArray addObject:aEvent];
-		}		
-		else if ([self isSameDay:fourthDay to:aEvent.startDate] && hour < 8){
+		} else if ([self isSameDay:fourthDay to:aEvent.startDate] && hour < 8) {
 			[self.fourthDayAfterMidnightArray addObject:aEvent];
 		}
 		
@@ -206,8 +201,7 @@
 	
     if (searching){
         return @"";
-    }
-    else {
+    } else {
         switch (section) {
             case 0:
                 return @"Thursday";
@@ -232,8 +226,7 @@
 - (CGFloat)tableView:(UITableView *)theTableView heightForHeaderInSection:(NSInteger)section {
     if ([self tableView:theTableView titleForHeaderInSection:section] != nil) {
         return SectionHeaderHeight;
-    }
-    else {
+    } else {
         // If no section header title, no section header needed
         return 0;
     }
@@ -271,8 +264,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	if (searching){
         return [searchAllEvents count];
-    }
-    else {
+    } else {
         switch (section) {
             case 0:
                 return [self.firstDayArray count];
@@ -306,8 +298,7 @@
 	Event *aEvent;
     if (searching) {
         aEvent = [searchAllEvents objectAtIndex:indexPath.row];
-    }
-    else {
+    } else {
         switch (indexPath.section) {
             case 0:
                 aEvent = [self.firstDayArray objectAtIndex:indexPath.row];
@@ -323,35 +314,29 @@
                 break;
             default:
                 return nil;
-                
         }
     }
+    
 	UIImage *trackColor = [UIImage imageNamed:@"community.png"];
 	if ([aEvent.track isEqualToString:@"Culture"]){
 		trackColor = [UIImage imageNamed:@"culture.png"];
-	}
-	else if ([aEvent.track isEqualToString:@"Society and Politics"]){
+	} else if ([aEvent.track isEqualToString:@"Society and Politics"]){
 		trackColor = [UIImage imageNamed:@"society.png"];
-	}
-	else if ([aEvent.track isEqualToString:@"Hacking"]){
+	} else if ([aEvent.track isEqualToString:@"Hacking"]){
 		trackColor = [UIImage imageNamed:@"hacking.png"];
-	}
-	else if ([aEvent.track isEqualToString:@"Show"]){
+	} else if ([aEvent.track isEqualToString:@"Show"]){
 		trackColor = [UIImage imageNamed:@"show.png"];
-	}
-	else if ([aEvent.track isEqualToString:@"Science"]){
+	} else if ([aEvent.track isEqualToString:@"Science"]){
 		trackColor = [UIImage imageNamed:@"science.png"];
 	}
-	
-	
 	
 	NSString *detailString;
     if (searching) {
         detailString = [NSString stringWithFormat:@"%@ - Time: %@ - Room: %@",aEvent.date,aEvent.start,aEvent.room];
-    }
-    else{
+    } else {
         detailString = [NSString stringWithFormat:@"Time: %@ - Room: %@",aEvent.start,aEvent.room];
     }
+    
 	cell.textLabel.text = aEvent.title;
 	cell.detailTextLabel.text = detailString;
 	cell.imageView.image = trackColor;

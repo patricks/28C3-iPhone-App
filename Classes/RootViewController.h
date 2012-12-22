@@ -30,8 +30,6 @@
     BOOL letUserSelectRow;
     
     UIActivityIndicatorView *loadingIndicator;
-
-
 }
 
 @property (nonatomic,retain) NSMutableArray *firstDayArray;
@@ -43,7 +41,7 @@
 @property (nonatomic,retain) NSMutableArray *thirdDayAfterMidnightArray;
 @property (nonatomic,retain) NSMutableArray *fourthDayAfterMidnightArray;
 
--(void)organizeTheData;
+- (void)organizeTheData;
 - (BOOL)isSameDay:(NSDate*)date1 to:(NSDate*)date2;
 - (void)reloadTheXML;
 

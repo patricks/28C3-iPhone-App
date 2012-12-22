@@ -25,11 +25,9 @@
 	if([elementName isEqualToString:@"schedule"]) {
 		//Empty the array.
         [appDelegate.events removeAllObjects];
-	}
-	else if([elementName isEqualToString:@"day"]) {
+	} else if([elementName isEqualToString:@"day"]) {
 		tempString = [attributeDict objectForKey:@"date"];
-	}
-	else if([elementName isEqualToString:@"event"]) {
+	} else if([elementName isEqualToString:@"event"]) {
 		
 		//Initialize the event.
 		aEvent = [[Event alloc] init];
@@ -48,8 +46,7 @@
 	
 	if(!currentElementValue){
 		currentElementValue = [[NSMutableString alloc] initWithString:string];
-	}
-	else{
+	} else {
         [currentElementValue appendString:string];
 	}
 	
@@ -70,12 +67,10 @@
 		[appDelegate.events addObject:aEvent];
 		[aEvent release];
 		aEvent = nil;
-	}
-    else if ([elementName isEqualToString:@"release"]){
+	} else if ([elementName isEqualToString:@"release"]) {
         [[NSUserDefaults standardUserDefaults] setObject:currentElementValue forKey:@"newFahrplanVersion"];
         [[NSUserDefaults standardUserDefaults]synchronize];
-    }
-	else {
+    } else {
 		NSString *cleanerString = [currentElementValue stringByReplacingOccurrencesOfString:@"\n" withString:@""];
 		NSString *theCleanestString = [cleanerString stringByReplacingOccurrencesOfString:@"\r" withString:@""];
 		theCleanestString = [theCleanestString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
@@ -111,8 +106,7 @@
             if (aEvent.speaker != nil) {
                 NSString *speakerTemp = [[aEvent.speaker stringByAppendingString:@", "] stringByAppendingString:theCleanestString];
                 [aEvent setValue:speakerTemp forKey:@"speaker"];
-            }
-            else {
+            } else {
                 [aEvent setValue:theCleanestString forKey:@"speaker"];
             }
         }
@@ -133,8 +127,7 @@
             
             if (hour < 8){
                 [aEvent setRealDate:[myDate dateByAddingTimeInterval:86400]];
-            }
-            else {
+            } else {
                 [aEvent setRealDate:myDate];
             }
         }
