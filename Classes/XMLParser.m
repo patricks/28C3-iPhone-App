@@ -119,8 +119,6 @@
         
 		[aEvent setValue:tempString forKey:@"date"];
         
-        NSLog(@"DBG: tempString: %@", tempString);
-        
         if ([aEvent.date length] > 0) {
             NSDateFormatter *df = [[NSDateFormatter alloc] init];
             [df setDateFormat:@"yyyy-MM-dd HH:mm"];
